@@ -6,8 +6,8 @@ CFLAGS = -Wall -Wextra -std=c99
 
 # Input and output files
 INPUT = c.niam
-OUTPUT = main.c
-EXEC = main
+OUTPUT = temp.c
+EXEC = niam
 
 #----------------------------------------------------------------------------------------------#
 # Dependency Tree 
@@ -18,16 +18,17 @@ define REVERSE_FIX
 	sed 'y/{}()<>/}{)(></' > $(OUTPUT)
 endef
 
+# Compile and cleanup.
 $(EXEC): $(OUTPUT)
 	$(CC) $(CFLAGS) $(OUTPUT) -o $(EXEC)	
 	rm $(OUTPUT)
 
-# Reverse, compile, execute, and cleanup
+# Reverse the source code and create a temporary C file.
 $(OUTPUT): $(INPUT)
 	$(REVERSE_FIX)
 	
-# Clean generated files
+# Clean up binary.
 clean:
-	rm $(OUTPUT) $(EXEC)
+	rm $(EXEC)
 
 
