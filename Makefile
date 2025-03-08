@@ -13,7 +13,7 @@ EXEC = niam
 # Dependency Tree 
 #----------------------------------------------------------------------------------------------#
 
-define REVERSE_FIX
+define REVERSE
 	tac $(INPUT) | rev | \
 	sed 'y/{}()<>/}{)(></' > $(OUTPUT)
 endef
@@ -25,7 +25,7 @@ $(EXEC): $(OUTPUT)
 
 # Reverse the source code and create a temporary C file.
 $(OUTPUT): $(INPUT)
-	$(REVERSE_FIX)
+	$(REVERSE)
 	
 # Clean up binary.
 clean:
